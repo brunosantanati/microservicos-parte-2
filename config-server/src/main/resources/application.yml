@@ -8,5 +8,5 @@ spring:
         encrypt:
             enabled: false
         git:
-          uri: https://github.com/brunosantanati/microservicos-parte-2/tree/main/microservicos-config/
+          uri: https://github.com/brunosantanati/microservice-repo/
           search-paths: fornecedor
