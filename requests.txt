@@ -1,0 +1,20 @@
+POST http://localhost:8080/compra
+
+Body:
+{
+	"itens": [
+		{
+			"id": 3,
+			"quantidade": 6
+		},
+		{
+			"id": 1,
+			"quantidade": 15
+		}
+	],
+	"endereco": {
+		"rua": "Rua de Mariana",
+		"numero": "101",
+		"estado": "DF"
+	}
+}
