@@ -1,0 +1,6 @@
+Comandos que foram necessários rodar no BD:
+
+use fornecedor;
+insert into info_fornecedor values (1, 'Rua Teste Louco, 350', 'DF', 'Fornecedor X');
+insert into produto (id, descricao, estado, nome, preco) values (1, 'escrivaninha para escritório', 'nova', 'escrivaninha', 300);
+insert into produto (id, descricao, estado, nome, preco) values (3, 'teclado USB para notebook', 'nova', 'teclado', 300);
