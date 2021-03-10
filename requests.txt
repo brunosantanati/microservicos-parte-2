@@ -18,3 +18,7 @@ Body:
 		"estado": "DF"
 	}
 }
+
+-------
+
+GET http://localhost:8080/compra/1
