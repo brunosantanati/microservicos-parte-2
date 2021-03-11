@@ -9,4 +9,4 @@ spring:
             enabled: false
         git:
           uri: https://github.com/brunosantanati/microservice-repo/
-          search-paths: fornecedor, loja
+          search-paths: fornecedor, loja, transportador
