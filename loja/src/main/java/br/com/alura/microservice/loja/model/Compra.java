@@ -3,6 +3,8 @@ package br.com.alura.microservice.loja.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,9 @@ public class Compra {
 	private LocalDate dataParaEntrega;
 	
 	private Long voucher;
+	
+	@Enumerated(EnumType.STRING)
+	private CompraState state;
 
 	public Long getId() {
 		return id;
@@ -70,5 +75,13 @@ public class Compra {
 
 	public void setVoucher(Long voucher) {
 		this.voucher = voucher;
+	}
+	
+	public CompraState getState() {
+		return state;
+	}
+
+	public void setState(CompraState state) {
+		this.state = state;
 	}
 }

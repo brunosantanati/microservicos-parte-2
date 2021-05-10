@@ -15,6 +15,7 @@ import br.com.alura.microservice.loja.dto.InfoFornecedorDTO;
 import br.com.alura.microservice.loja.dto.InfoPedidoDTO;
 import br.com.alura.microservice.loja.dto.VoucherDTO;
 import br.com.alura.microservice.loja.model.Compra;
+import br.com.alura.microservice.loja.model.CompraState;
 import br.com.alura.microservice.loja.repository.CompraRepository;
 
 @Service
@@ -38,11 +39,17 @@ public class CompraService {
 			threadPoolKey = "realizaCompraThreadPool")
 	public Compra realizaCompra(CompraDTO compra) {
 		
-		final String estado = compra.getEndereco().getEstado();
+		Compra compraSalva = new Compra();
+		compraSalva.setState(CompraState.RECEBIDO);
+		compraSalva.setEnderecoDestino(compra.getEndereco().toString());
+		compraRepository.save(compraSalva);
 		
-		InfoFornecedorDTO info = fornecedorClient.getInfoPorEstado(estado);
-		
+		InfoFornecedorDTO info = fornecedorClient.getInfoPorEstado(compra.getEndereco().getEstado());
 		InfoPedidoDTO infoPedido = fornecedorClient.realizaPedido(compra.getItens());
+		compraSalva.setState(CompraState.PEDIDO_REALIZADO);
+		compraSalva.setPedidoId(infoPedido.getId());
+		compraSalva.setTempoDePreparo(infoPedido.getTempoDePreparo());
+		compraRepository.save(compraSalva);
 		
 		InfoEntregaDTO entregaDTO = new InfoEntregaDTO();
 		entregaDTO.setPedidoId(infoPedido.getId());
@@ -50,15 +57,11 @@ public class CompraService {
 		entregaDTO.setEnderecoOrigem(info.getEndereco());
 		entregaDTO.setEnderecoDestino(compra.getEndereco().toString());
 		VoucherDTO voucher = transportadorClient.reservaEntrega(entregaDTO);
-		
-		Compra compraSalva = new Compra();
-		compraSalva.setPedidoId(infoPedido.getId());
-		compraSalva.setTempoDePreparo(infoPedido.getTempoDePreparo());
-		compraSalva.setEnderecoDestino(info.getEndereco());
+		compraSalva.setState(CompraState.RESERVA_ENTREGA_REALIZADA);
 		compraSalva.setDataParaEntrega(voucher.getPrevisaoParaEntrega());
 		compraSalva.setVoucher(voucher.getNumero());
 		compraRepository.save(compraSalva);
-		
+				
 		/*System.out.println(info.getEndereco());
 		
 		try {
