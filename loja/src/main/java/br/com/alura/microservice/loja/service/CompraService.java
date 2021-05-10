@@ -34,6 +34,23 @@ public class CompraService {
 	public Compra getById(Long id) {
 		return compraRepository.findById(id).orElse(new Compra());
 	}
+	
+	/**
+	 * Caso a compra não seja processada corretamente, o cliente pode tentar reprocessa-la a partir do último estado da compra
+	 */
+	public Compra reprocessaCompra(Long id) {
+		//aqui viria a implementação
+		return null;
+	}
+	
+	/**
+	 * Caso a compra não seja processada corretamente na primeira vez ou caso o cliente tente reprocessar a compra várias vezes
+	 * e não consiga, ele pode cancelar a compra
+	 */
+	public Compra cancelaCompra(Long id) {
+		//aqui viria a implementação
+		return null;
+	}
 
 	@HystrixCommand(fallbackMethod = "realizaCompraFallback",
 			threadPoolKey = "realizaCompraThreadPool")
@@ -51,9 +68,6 @@ public class CompraService {
 		compraSalva.setPedidoId(infoPedido.getId());
 		compraSalva.setTempoDePreparo(infoPedido.getTempoDePreparo());
 		compraRepository.save(compraSalva);
-		
-		//Forçar um erro para fins de teste
-		if(1 == 1) throw new RuntimeException(); //APAGAR DEPOIS
 		
 		InfoEntregaDTO entregaDTO = new InfoEntregaDTO();
 		entregaDTO.setPedidoId(infoPedido.getId());
