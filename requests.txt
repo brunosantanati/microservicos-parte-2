@@ -41,3 +41,21 @@ PEGAR INFORMAÇÕES DE FORNCEDOR
 
 GET http://localhost:8081/info/DF
 GET http://localhost:5555/fornecedor/info/DF
+
+-------
+
+AUTENTICAR/TOKEN
+
+curl --location --request POST 'http://localhost:8088/oauth/token' \
+--header 'Authorization: Basic bG9qYTpsb2phcHdk' \
+--form 'scope="web"' \
+--form 'grant_type="password"' \
+--form 'user="joao"' \
+--form 'password="joaopwd"'
+
+-------
+
+PEGAR INFORMAÇÕES DO USER PELO TOKEN
+
+curl --location --request GET 'http://localhost:8088/user' \
+--header 'Authorization: Bearer xxx'
