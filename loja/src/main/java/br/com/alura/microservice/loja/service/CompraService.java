@@ -43,6 +43,7 @@ public class CompraService {
 		compraSalva.setState(CompraState.RECEBIDO);
 		compraSalva.setEnderecoDestino(compra.getEndereco().toString());
 		compraRepository.save(compraSalva);
+		compra.setCompraId(compraSalva.getId());
 		
 		InfoFornecedorDTO info = fornecedorClient.getInfoPorEstado(compra.getEndereco().getEstado());
 		InfoPedidoDTO infoPedido = fornecedorClient.realizaPedido(compra.getItens());
@@ -50,6 +51,9 @@ public class CompraService {
 		compraSalva.setPedidoId(infoPedido.getId());
 		compraSalva.setTempoDePreparo(infoPedido.getTempoDePreparo());
 		compraRepository.save(compraSalva);
+		
+		//Forçar um erro para fins de teste
+		if(1 == 1) throw new RuntimeException(); //APAGAR DEPOIS
 		
 		InfoEntregaDTO entregaDTO = new InfoEntregaDTO();
 		entregaDTO.setPedidoId(infoPedido.getId());
@@ -75,6 +79,11 @@ public class CompraService {
 	}
 	
 	public Compra realizaCompraFallback(CompraDTO compra) {
+		
+		if(compra.getCompraId() != null) {
+			return compraRepository.findById(compra.getCompraId()).get();
+		}
+		
 		Compra compraFallback = new Compra();
 		compraFallback.setEnderecoDestino(compra.getEndereco().toString());
 		return compraFallback;
