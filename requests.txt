@@ -1,4 +1,7 @@
+REALIZAR COMPRA
+
 POST http://localhost:8080/compra
+POST http://localhost:5555/loja/compra
 
 Body:
 {
@@ -21,4 +24,20 @@ Body:
 
 -------
 
+PEGAR COMPRA POR ID
+
 GET http://localhost:8080/compra/1
+GET http://localhost:5555/loja/compra/2
+
+-------
+
+VER ROTAS
+
+GET http://localhost:5555/actuator/routes
+
+-------
+
+PEGAR INFORMAÇÕES DE FORNCEDOR
+
+GET http://localhost:8081/info/DF
+GET http://localhost:5555/fornecedor/info/DF
