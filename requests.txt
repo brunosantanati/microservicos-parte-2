@@ -50,7 +50,7 @@ curl --location --request POST 'http://localhost:8088/oauth/token' \
 --header 'Authorization: Basic bG9qYTpsb2phcHdk' \
 --form 'scope="web"' \
 --form 'grant_type="password"' \
---form 'user="joao"' \
+--form 'username="joao"' \
 --form 'password="joaopwd"'
 
 -------
@@ -58,4 +58,4 @@ curl --location --request POST 'http://localhost:8088/oauth/token' \
 PEGAR INFORMAÇÕES DO USER PELO TOKEN
 
 curl --location --request GET 'http://localhost:8088/user' \
---header 'Authorization: Bearer xxx'
+--header 'Authorization: Bearer 1e56c70a-6418-4c33-ab2d-b41d79e53384'
