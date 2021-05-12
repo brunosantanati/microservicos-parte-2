@@ -309,6 +309,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Testar repasse do token",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/fornecedor/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"fornecedor",
+						"pedido"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
