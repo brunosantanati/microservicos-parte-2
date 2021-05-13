@@ -12,3 +12,4 @@ eureka:
 management:  endpoints:    web:      exposure:        include:        - "routes"
         
 zuul:  sensitive-headers:  - Cookie, Authorization
+    host:    connect-timeout-millis: 60000    socket-timeout-millis: 60000
